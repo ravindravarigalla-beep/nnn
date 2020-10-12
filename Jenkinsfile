@@ -1,14 +1,4 @@
 pipeline {
-  
-   environment {
-    AWS_ACCESS_KEY_ID = "AKIAI7URLXLFG3JI2KJQ"
-    SECRET_ACCESS_KEY_ID = "MguqkbqbMzePS9a0f66mgeeI25Y+7P/lK4H9r99N"
-    FE_SVC_NAME = "${APP_NAME}-frontend"
-    CLUSTER = "jenkins-cd"
-    CLUSTER_ZONE = "us-east1-d"
-    IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
-    JENKINS_CRED = "${PROJECT}"
-  }
   agent {
     kubernetes {
       //cloud 'kubernetes'
@@ -30,16 +20,17 @@ spec:
   volumes:
     - name: docker-config
       configMap:
-        name: docker-config  
+        name: docker-config
 """
     }
   }
   stages {
     stage('Build with Kaniko') {
       steps {
+        git 'https://github.com/prabhatsharma/sample-microservice'
         container(name: 'kaniko') {
             sh '''
-            /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=807030547932.dkr.ecr.us-east-2.amazonaws.com/new --destination=807030547932.dkr.ecr.us-east-2.amazonaws.com/new
+            /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=123456789498.dkr.ecr.us-west-2.amazonaws.com/sample-microservice:latest --destination=123456789498.dkr.ecr.us-west-2.amazonaws.com/sample-microservice:v$BUILD_NUMBER
             '''
         }
       }
