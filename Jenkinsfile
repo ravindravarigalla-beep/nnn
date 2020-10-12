@@ -2,7 +2,7 @@ pipeline {
   
    environment {
     AWS_ACCESS_KEY_ID = "AKIAI7URLXLFG3JI2KJQ"
-    AWS_SECRET_ACCESS_KEY = "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"
+    SECRET_ACCESS_KEY = "MguqkbqbMzePS9a0f66mgeeI25Y+7P/lK4H9r99N"
     FE_SVC_NAME = "${APP_NAME}-frontend"
     CLUSTER = "jenkins-cd"
     CLUSTER_ZONE = "us-east1-d"
@@ -44,7 +44,7 @@ spec:
         container('aws') {
           sh """
            aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
-           aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
+           aws configure set aws_secret_access_key "${SECRET_ACCESS_KEY}"
            eval $(aws ecr get-login --no-include-email --region us-east-2 | sed 's;https://;;g')
              """
         }
