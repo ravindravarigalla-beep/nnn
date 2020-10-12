@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: docker-config
+data:
+  config.json: |-
+    {
+      "credHelpers": {
+        "807030547932.dkr.ecr.us-east-2.amazonaws.com/new": "ecr-login"
+      }
+    }
