@@ -39,6 +39,7 @@ spec:
 """
     }
   }
+  stages {
   stage('Build and push image with Container Builder') {
       steps {
         container('aws') {
@@ -48,7 +49,6 @@ spec:
         }
       }
     }
-  stages {
     stage('Build with Kaniko') {
       steps {
         container(name: 'kaniko') {
