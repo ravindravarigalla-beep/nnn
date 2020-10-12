@@ -44,7 +44,6 @@ spec:
         container('aws') {
           sh """
            aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
-           aws configure set aws_secret_access_key "${SECRET_ACCESS_KEY_ID}"
            eval $(aws ecr get-login --no-include-email --region us-east-2 | sed 's;https://;;g')
              """
         }
