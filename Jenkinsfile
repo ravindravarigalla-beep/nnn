@@ -30,25 +30,11 @@ spec:
   volumes:
     - name: docker-config
       configMap:
-        name: docker-config
-  - name: aws
-    image: amazon/aws-cli
-    command:
-    - cat
-    tty: true     
+        name: docker-config  
 """
     }
   }
   stages {
-  stage('Build and push image with Container Builder') {
-      steps {
-        container('aws') {
-          sh """
-             aws  --version
-             """
-        }
-      }
-    }
     stage('Build with Kaniko') {
       steps {
         container(name: 'kaniko') {
