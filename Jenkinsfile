@@ -43,8 +43,8 @@ spec:
       steps {
         container('aws') {
           sh """
-           aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
-           eval $(aws ecr get-login --no-include-email --region us-east-2 | sed 's;https://;;g')
+           #aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
+           #eval $(aws ecr get-login --no-include-email --region us-east-2 | sed 's;https://;;g')
              """
         }
       }
