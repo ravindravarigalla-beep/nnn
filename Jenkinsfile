@@ -1,6 +1,6 @@
 pipeline {
   environment { 
-      AN_ACCESS_KEY = credentials('awsacesskey') 
+      AN_ACCESS_KEY = credentials('awsaccesskey') 
             }
   agent {
     kubernetes {
