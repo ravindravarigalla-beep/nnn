@@ -44,7 +44,7 @@ spec:
               aws configure set aws_secret_access_key ${AN_SECRET_KEY}
               aws iam list-users
               aws ecr get-login-password \
-              --region us-east-2 \
+              --region us-east-2 
               aws ecr list-images \
               --repository-name new
             '''
