@@ -42,7 +42,7 @@ spec:
               aws --version
               aws configure set aws_access_key_id ${AN_ACCESS_KEY}
               aws configure set aws_secret_access_key ${AN_SECRET_KEY}
-              $(aws ecr get-login --no-include-email --region us-east-2)
+              aws ecr get-login --region us-east-2 | sed -e 's|-e none||g'
             '''
         }
       }
