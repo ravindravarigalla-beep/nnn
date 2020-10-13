@@ -41,7 +41,7 @@ spec:
             sh '''
               aws --version
               aws configure set aws_access_key_id ${AN_ACCESS_KEY}
-              aws configure set aws_access_key_id ${AN_SECRET_KEY}
+              aws configure set aws_secret_access_key ${AN_SECRET_KEY}
               aws iam list-users
             '''
         }
