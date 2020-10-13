@@ -19,7 +19,7 @@ spec:
     - cat
     tty: true
   - name: aws
-    image: amazon/aws-cli
+    image: jessfraz/img
     imagePullPolicy: Always
     command:
     - cat
@@ -39,10 +39,17 @@ spec:
       steps {
         container(name: 'aws') {
             sh '''
-              aws --version
-              aws configure set aws_access_key_id ${AN_ACCESS_KEY}
-              aws configure set aws_secret_access_key ${AN_SECRET_KEY}
-              aws ecr get-login --region us-east-2 | sed -e 's|-e none||g'
+              #aws --version
+              #aws configure set aws_access_key_id ${AN_ACCESS_KEY}
+              #aws configure set aws_secret_access_key ${AN_SECRET_KEY}
+              #aws ecr get-login --region us-east-2 | sed -e 's|-e none||g'
+              wget https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/0.3.1/linux-amd64/docker-credential-ecr-login
+              chmod +x docker-credential-ecr-login
+              mkdir ~/bin
+              mv docker-credential-ecr-login ~/bin/docker-credential-ecr-login
+              img build . -t 807030547932.dkr.ecr.us-east-2.amazonaws.com/new -t 807030547932.dkr.ecr.us-east-2.amazonaws.com/new:vImg$BUILD_NUMBER
+              img push 807030547932.dkr.ecr.us-east-2.amazonaws.com/new
+              img push 807030547932.dkr.ecr.us-east-2.amazonaws.com/new:vImg$BUILD_NUMBER
             '''
         }
       }
