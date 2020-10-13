@@ -51,7 +51,7 @@ spec:
       steps {
         container(name: 'kaniko') {
             sh '''
-            #/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=807030547932.dkr.ecr.us-east-2.amazonaws.com/new --destination=807030547932.dkr.ecr.us-east-2.amazonaws.com/new
+            /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=807030547932.dkr.ecr.us-east-2.amazonaws.com/new --destination=807030547932.dkr.ecr.us-east-2.amazonaws.com/new
             '''
         }
       }
