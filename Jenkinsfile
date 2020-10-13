@@ -31,17 +31,17 @@ spec:
     }
   }
   stages {
-    stage('Build and push image with Container ecr') {
-        environment { 
-                AN_ACCESS_KEY = credentials('awsacesskey') 
-           steps{
-        container('gcloud') {
-          sh "aws configure set aws_access_key_id ${awsaccesskey}"
-          sh "aws configure set aws_secret_access_key ${awssecretkey}"
+        stage('Example') {
+            environment { 
+                AN_ACCESS_KEY = credentials('my-predefined-secret-text') 
+            }
+            steps {
+              container(name: 'aws') { 
+                sh 'printenv'
+            }
         }
-      }
     }
-  }
+}   
     stage('Build with Kaniko') {
       steps {
         git 'https://github.com/prabhatsharma/sample-microservice'
