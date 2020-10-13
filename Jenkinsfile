@@ -45,6 +45,8 @@ spec:
               aws iam list-users
               aws ecr get-login-password \
               --region us-east-2 \
+              aws ecr list-images \
+              --repository-name new
             '''
         }
       }
