@@ -1,6 +1,7 @@
 pipeline {
   environment { 
       AN_ACCESS_KEY = credentials('awsaccesskey') 
+      AN_SECRET_KEY = credentials('awssecretkey') 
             }
   agent {
     kubernetes {
@@ -40,6 +41,8 @@ spec:
             sh '''
               aws --version
               aws configure set aws_access_key_id ${AN_ACCESS_KEY}
+              aws configure set aws_access_key_id ${AN_SECRET_KEY}
+              aws iam list-users
             '''
         }
       }
