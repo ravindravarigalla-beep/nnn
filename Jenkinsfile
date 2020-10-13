@@ -47,13 +47,5 @@ spec:
         }
       }
     }
-     stage('Build with Kaniko') {
-      steps {
-        container(name: 'kaniko') {
-            sh '''
-             #/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=807030547932.dkr.ecr.us-east-2.amazonaws.com/new:latest --destination=807030547932.dkr.ecr.us-east-2.amazonaws.com/new:v$BUILD_NUMBER
-        }
-      }
-    }
   }
 }
