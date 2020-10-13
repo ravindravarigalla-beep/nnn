@@ -1,8 +1,8 @@
 pipeline {
    environment {
     PROJECT = "REPLACE_WITH_YOUR_PROJECT_ID"
-    AWS_ACCESS_KEY_ID = credentials('awsaccesskey')  
-    AWS_SECRET_ACCESS_KEY= credentials('awssecretkey')  
+    awsaccesskey = credentials('awsaccesskey')  
+    awssecretkey = credentials('awssecretkey') 
     CLUSTER = "jenkins-cd"
     CLUSTER_ZONE = "us-east1-d"
     IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
@@ -43,8 +43,8 @@ spec:
     stage('Build and push image with Container ecr') {
       steps {
         container('gcloud') {
-          sh "aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}"
-          sh "aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}"
+          sh "aws configure set aws_access_key_id ${awsaccesskey}"
+          sh "aws configure set aws_secret_access_key ${awssecretkey}"
         }
       }
     }
