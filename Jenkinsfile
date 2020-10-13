@@ -1,4 +1,7 @@
 pipeline {
+   environment { 
+                AN_ACCESS_KEY = credentials('awsacesskey') 
+            } 
    
   agent {
     kubernetes {
@@ -21,8 +24,7 @@ spec:
   volumes:
     - name: docker-config
       configMap:
-        name: docker-configaws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
-   - name: aws
+    - name: docker-config
     image: amazon/aws-cli
     command:
     - cat
@@ -32,9 +34,6 @@ spec:
   }
   stages {
         stage('Example') {
-            environment { 
-                AN_ACCESS_KEY = credentials('my-predefined-secret-text') 
-            }
             steps {
               container(name: 'aws') { 
                 sh 'printenv'
