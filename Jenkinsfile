@@ -1,4 +1,14 @@
 pipeline {
+   environment {
+    PROJECT = "REPLACE_WITH_YOUR_PROJECT_ID"
+    AWS_ACCESS_KEY_ID = "AKIAI7URLXLFG3JI2KJQ"
+    AWS_SECRET_ACCESS_KEY = "MguqkbqbMzePS9a0f66mgeeI25Y+7P/lK4H9r99N"
+    CLUSTER = "jenkins-cd"
+    CLUSTER_ZONE = "us-east1-d"
+    IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+    JENKINS_CRED = "${PROJECT}"
+  }
+
   agent {
     kubernetes {
       //cloud 'kubernetes'
@@ -15,16 +25,29 @@ spec:
     - cat
     tty: true
     volumeMounts:
-      - name: docker-config
+      - name: docker-amazon/aws-cli
         mountPath: /kaniko/.docker
   volumes:
     - name: docker-config
       configMap:
-        name: docker-config
+        name: docker-configaws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+   - name: aws
+    image: amazon/aws-cli
+    command:
+    - cat
+    tty: true      
 """
     }
   }
   stages {
+    stage('Build and push image with Container ecr') {
+      steps {
+        container('gcloud') {
+          sh "aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}"
+          sh "aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}"
+        }
+      }
+    }
     stage('Build with Kaniko') {
       steps {
         git 'https://github.com/prabhatsharma/sample-microservice'
