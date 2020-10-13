@@ -47,5 +47,15 @@ spec:
         }
       }
     }
+    stage('Build with Kaniko') {
+      steps {
+        git 'https://github.com/prabhatsharma/sample-microservice'
+        container(name: 'kaniko') {
+            sh '''
+            /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=123456789498.dkr.ecr.us-west-2.amazonaws.com/sample-microservice:latest --destination=123456789498.dkr.ecr.us-west-2.amazonaws.com/sample-microservice:v$BUILD_NUMBER
+            '''
+        }
+      }
+    }
   }
 }
