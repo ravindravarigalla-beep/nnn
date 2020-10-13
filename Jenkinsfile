@@ -39,7 +39,7 @@ spec:
         container(name: 'aws') {
             sh '''
               aws --version
-              aws configure set aws_access_key_id ${AN_ACCESS_KEY}
+              #aws configure set aws_access_key_id ${AN_ACCESS_KEY}
             '''
         }
       }
@@ -48,7 +48,7 @@ spec:
       steps {
         container(name: 'kaniko') {
             sh '''
-            /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=123456789498.dkr.ecr.us-west-2.amazonaws.com/sample-microservice:latest --destination=123456789498.dkr.ecr.us-west-2.amazonaws.com/sample-microservice:v$BUILD_NUMBER
+            #/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=123456789498.dkr.ecr.us-west-2.amazonaws.com/sample-microservice:latest --destination=123456789498.dkr.ecr.us-west-2.amazonaws.com/sample-microservice:v$BUILD_NUMBER
             '''
         }
       }
