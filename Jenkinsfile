@@ -1,4 +1,7 @@
 pipeline {
+  environment { 
+      AN_ACCESS_KEY = credentials('awsacesskey') 
+            }
   agent {
     kubernetes {
       //cloud 'kubernetes'
@@ -36,6 +39,7 @@ spec:
         container(name: 'aws') {
             sh '''
               aws --version
+              aws configure set aws_access_key_id ${AN_ACCESS_KEY}
             '''
         }
       }
