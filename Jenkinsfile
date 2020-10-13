@@ -39,7 +39,7 @@ spec:
         container(name: 'aws') {
             sh '''
               aws --version
-              #aws configure set aws_access_key_id ${AN_ACCESS_KEY}
+              aws configure set aws_access_key_id ${AN_ACCESS_KEY}
             '''
         }
       }
