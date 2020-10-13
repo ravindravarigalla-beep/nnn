@@ -15,7 +15,7 @@ spec:
     - cat
     tty: true
   - name: aws
-    image: amazon/awscli
+    image: amazon/aws-cli
     imagePullPolicy: Always
     command:
     - cat
