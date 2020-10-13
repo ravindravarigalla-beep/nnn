@@ -1,8 +1,8 @@
 pipeline {
    environment {
     PROJECT = "REPLACE_WITH_YOUR_PROJECT_ID"
-    AWS_ACCESS_KEY_ID = "AKIAI7URLXLFG3JI2KJQ"
-    AWS_SECRET_ACCESS_KEY = "MguqkbqbMzePS9a0f66mgeeI25Y+7P/lK4H9r99N"
+    AWS_ACCESS_KEY_ID = credentials('awsaccesskey')  
+    AWS_SECRET_ACCESS_KEY= credentials('awssecretkey')  
     CLUSTER = "jenkins-cd"
     CLUSTER_ZONE = "us-east1-d"
     IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
