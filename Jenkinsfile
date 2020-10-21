@@ -16,11 +16,12 @@ spec:
     tty: true
     volumeMounts:
       - name: docker-config
-        mountPath: /kaniko/.docker/config.json
+        mountPath: /kaniko/.docker
   volumes:
     - name: docker-config
       configMap:
         name: docker-config
+        key:  config.json
 """
     }
   }
