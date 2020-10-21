@@ -22,8 +22,8 @@ spec:
       configMap:
         name: docker-config
         items:
-        - key: "config.json"
-          path: "config.json"
+        - key: .dockerconfigjson
+          path: config.json
 """
     }
   }
