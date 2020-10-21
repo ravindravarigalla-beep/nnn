@@ -36,7 +36,7 @@ spec:
       steps {
         container(name: 'kaniko') {
             sh '''
-              ("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
+              #("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
             '''
         }
       }
