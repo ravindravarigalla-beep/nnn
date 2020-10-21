@@ -13,16 +13,10 @@ spec:
     imagePullPolicy: Always
     command:
     - cat
-    tty: true
-  - name: aws
-    image: amazon/aws-cli 
-    imagePullPolicy: Always
-    command:
-    - cat
     tty: true  
     volumeMounts:
       - name: docker-config
-        mountPath: /kaniko/.dockersh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
+        mountPath: /kaniko/.docker
   volumes:
     - name: docker-config
       configMap:
@@ -32,15 +26,6 @@ spec:
     }
   }
   stages {
-    stage('aws') {
-      steps {
-        container(name: 'kaniko') {
-            sh '''
-              #("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
-            '''
-        }
-      }
-    }
     stage('Build with Kaniko') {
       steps {
         git 'https://github.com/prabhatsharma/sample-microservice'
