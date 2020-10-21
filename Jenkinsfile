@@ -31,7 +31,6 @@ spec:
         git 'https://github.com/prabhatsharma/sample-microservice'
         container(name: 'kaniko') {
             sh '''
-               login="$(aws ecr get-login --region ap-south-1 --no-include-email)"
               /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=479022012441.dkr.ecr.ap-south-1.amazonaws.com/new
             '''
         }
