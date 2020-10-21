@@ -18,6 +18,12 @@ spec:
   - name: aws
     image: jessfraz/img
     imagePullPolicy: Always
+    env:
+      - name: docker-config
+        valueFrom:
+            configMapKeyRef:
+                key: config.json
+                name: docker-config
     command:
     - cat
     tty: true
