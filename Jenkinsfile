@@ -30,7 +30,8 @@ spec:
         git 'https://github.com/prabhatsharma/sample-microservice'
         container(name: 'kaniko') {
             sh '''
-            cat /kaniko/.docker
+            cd /kaniko/.docker
+            ls
             /kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=479022012441.dkr.ecr.ap-south-1.amazonaws.com/new --destination=479022012441.dkr.ecr.ap-south-1.amazonaws.com/new:v$BUILD_NUMBER
             '''
         }
